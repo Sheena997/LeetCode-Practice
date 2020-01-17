@@ -20,12 +20,31 @@ public:
         if(s.size() != t.size())
             return false;
         
+        /*
         for(int i = 0; i < s.size(); ++i)
         {
             if(s.find(s[i]) != t.find(t[i]))
                 return false;
         }
         
+        return true;
+        */
+
+        // 两个unordered_map映射
+        unordered_map<char, char> map1;
+        unordered_map<char, char> map2;
+        
+        for(int i = 0; i < s.size(); ++i)
+        {
+            map1[s[i]] = t[i];
+            map2[t[i]] = s[i];
+        }
+        
+        for(int i = 0; i < s.size(); ++i)
+        {
+            if(map1[s[i]] != t[i] || map2[t[i]] != s[i])
+                return false;
+        }
         return true;
     }
 };
