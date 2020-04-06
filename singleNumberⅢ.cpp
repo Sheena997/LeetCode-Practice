@@ -9,6 +9,12 @@
 来源：LeetCode
 链接：https://leetcode-cn.com/problems/single-number-iii/
 */
+/*
+先全部异或一次, 得到的结果, 考察其的某个非0位(比如最高非0位), 
+那么只出现一次的两个数中, 在这个位上一个为0, 
+一个为1, 由此可以将数组中的元素分成两部分,重新遍历, 
+求两个异或值
+*/
 class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
