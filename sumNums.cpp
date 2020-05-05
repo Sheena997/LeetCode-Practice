@@ -13,8 +13,102 @@
 来源：LeetCode
 链接：https://leetcode-cn.com/problems/qiu-12n-lcof/
 */
-//方法一：帅气！
-/*
+
+//方法一：数学公式：
+class Solution {
+public:
+    int Sum_Solution(int n) {
+        return n * (n + 1) / 2;
+    }
+};
+
+
+
+//方法二：构造函数静态成员变量。
+class Tmp
+{
+public:
+    Tmp()
+    {
+        _sum += _n;
+        ++_n;
+    }
+    static void ReSet()
+    {
+        _n = 1;
+        _sum = 0;
+    }
+    static int GetSum()
+    {
+        return _sum;
+    }
+private:
+    static unsigned int _n;
+    static unsigned int _sum;
+};
+
+unsigned int Tmp::_n = 1;
+unsigned int Tmp::_sum = 0;
+
+class Solution {
+public:
+    int Sum_Solution(int n) {
+        Tmp::ReSet();
+        
+        Tmp* a = new Tmp[n];
+        delete[] a;
+        a = NULL;
+        
+        return Tmp::GetSum();
+    }
+};
+
+
+
+//方法三：函数模板：如果是1 + ... + 10或者其它具体数字
+template<int N>
+class Sum
+{
+public:
+    enum
+    {
+        RET = Sum<N - 1>::RET + N
+    };
+};
+
+template<>
+class Sum<1>
+{
+public:
+    enum
+    {
+        RET = 1
+    };
+};
+
+class Solution {
+public:
+    int Sum_Solution(int n) {
+        
+        return Sum<10>::RET;
+    }
+};
+
+
+//方法四：递归
+class Solution {
+public:
+    int Sum_Solution(int n) {
+        if(n == 1)
+            return 1;
+        return n + Sum_Solution(n - 1);
+    }
+};
+
+
+
+//方法五：帅气！
+
 class Solution {
 public:
     int sumNums(int n) {
@@ -22,78 +116,6 @@ public:
         n && (n += sumNums(n - 1));
         
         return n;
-    }
-};
-*/
-//方法二：构造函数
-class conSum
-{
-public:
-    conSum()
-    {
-        ++n;
-        sum += n;
-    }
-    static int GetSum()
-    {
-        return sum;
-    }
-    static int n;
-    static int sum;
-};
-int conSum::n = 0;//静态成员在类外进行初始化
-int conSum::sum = 0;
-class Solution {
-public:
-    int sumNums(int n) {
-        conSum::n = 0;
-        conSum::sum = 0;
-        conSum *res = new conSum[n];//构造n个对象
-        
-        return conSum::GetSum();
-    }
-};
-
-
-
-//方法一：帅气！
-/*
-class Solution {
-public:
-    int sumNums(int n) {
-        //return ((int)pow(n, 2) + n) >> 1;
-        n && (n += sumNums(n - 1));
-        
-        return n;
-    }
-};
-*/
-//方法二：构造函数
-class conSum
-{
-public:
-    conSum()
-    {
-        ++n;
-        sum += n;
-    }
-    static int GetSum()
-    {
-        return sum;
-    }
-    static int n;
-    static int sum;
-};
-int conSum::n = 0;//静态成员在类外进行初始化
-int conSum::sum = 0;
-class Solution {
-public:
-    int sumNums(int n) {
-        conSum::n = 0;
-        conSum::sum = 0;
-        conSum *res = new conSum[n];//构造n个对象
-        
-        return conSum::GetSum();
     }
 };
 
