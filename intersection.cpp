@@ -29,3 +29,24 @@ public:
         return res;
     }
 };
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        unordered_set<int> us1;
+        for(auto e : nums1)
+            us1.insert(e);
+        
+        unordered_set<int> us2;
+        for(auto e : nums2)
+            us2.insert(e);
+        
+        vector<int> res;
+        for(auto e : us1)
+        {
+            if(us2.find(e) != us2.end())
+                res.push_back(e);
+        }
+        
+        return res;
+    }
+};
