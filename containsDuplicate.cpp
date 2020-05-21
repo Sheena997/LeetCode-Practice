@@ -22,3 +22,20 @@ public:
         return false;
     }
 };
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        if(nums.empty())
+            return false;
+        map<int, int> mp;
+        for(auto e : nums)
+        {
+            ++mp[e];
+            if(mp[e] >= 2)
+                return true;
+        }
+        
+        return false;
+    }
+};
