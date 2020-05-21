@@ -36,3 +36,23 @@ public:
         return res;
     }
 };
+class Solution {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        vector<int> vc;
+        map<int, int> mp;
+        for(auto e : nums1)
+            ++mp[e];
+        
+        for(auto e : nums2)
+        {
+            if(mp[e] > 0)
+            {
+                vc.push_back(e);
+                --mp[e];
+            }
+        }
+        
+        return vc;
+    }
+};
