@@ -19,3 +19,26 @@ public:
         sort(nums1.begin(), nums1.end());
     }
 };
+
+class Solution {
+public:
+    void merge(vector<int>& A, int m, vector<int>& B, int n) {
+        int index = m + n - 1, l = m - 1, r = n - 1;
+        while(l >= 0 && r >= 0)
+        {
+            if(A[l] > B[r])
+                A[index--] = A[l--];
+            else
+                A[index--] = B[r--];
+        }
+        
+        while(l >= 0)
+        {
+            A[index--] = A[l--];
+        }
+        while(r >= 0)
+        {
+            A[index--] = B[r--];
+        }
+    }
+};
